@@ -15,11 +15,7 @@ public class FirstTest {
 
     public static final By searchField = (By.id("lst-ib"));
     public static boolean urlFound = false;
-<<<<<<< HEAD
-    public static boolean jobPsy = false;
-    public static boolean jobDev = false;
-=======
->>>>>>> origin/master
+
     public static WebDriver driver;
 
     @BeforeTest
@@ -34,11 +30,8 @@ public class FirstTest {
         };
     }
 
-<<<<<<< HEAD
-    //@Test(dataProvider = "keyWords")
-=======
+
     @Test(dataProvider = "keyWords")
->>>>>>> origin/master
     public void firstTest(String keyWord, String url) throws InterruptedException {
 
         driver.get("https://www.google.com.ua");
@@ -48,27 +41,17 @@ public class FirstTest {
         Thread.sleep(3000);
 
         for (int i = 3; i <= 5; i++) {
-<<<<<<< HEAD
             Thread.sleep(2000);
             List<WebElement> elementsList = driver.findElements(By.cssSelector("._Rm"));
 
-=======
-            System.out.println(i + "first");
-            Thread.sleep(2000);
-            List<WebElement> elementsList = driver.findElements(By.cssSelector("._Rm"));
-            Thread.sleep(2000);
->>>>>>> origin/master
             for (WebElement option : elementsList) {
                 if (option.getText().contains(url)) {
                     urlFound = true;
                     break;
                 }
             }
-<<<<<<< HEAD
             driver.findElement(By.xpath(".//*[@id='nav']/tbody/tr/td[" + i + "]/a/span")).click();
         }
-
-
         Assert.assertTrue(urlFound);
     }
 
@@ -82,14 +65,6 @@ public class FirstTest {
 
         }
 
-=======
-            System.out.println(i + "second");
-            driver.findElement(By.xpath(".//*[@id='nav']/tbody/tr/td[" + i + "]/a/span")).click();
-        }
-        Assert.assertTrue(urlFound);
-    }
-
->>>>>>> origin/master
     @AfterTest
     public void afterTest() {
         driver.close();
