@@ -29,8 +29,6 @@ public class FirstTest {
                 new Object[]{"осциллограф", "www.tehencom.com"},
         };
     }
-
-
     @Test(dataProvider = "keyWords")
     public void firstTest(String keyWord, String url) throws InterruptedException {
 
