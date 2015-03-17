@@ -1,8 +1,8 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,39 +14,62 @@ import java.util.List;
 public class FirstTest {
 
     public static final By searchField = (By.id("lst-ib"));
+    public static boolean urlFound = false;
+    public static boolean jobPsy = false;
+    public static boolean jobDev = false;
+    public static WebDriver driver;
+
+    @BeforeTest
+    public void beforeTest() {
+        driver = new FirefoxDriver();
+    }
 
     @DataProvider
     public Object[][] keyWords() {
-        return new Object[][] {
-                new Object[] {"осциллограф", "www.tehencom.com"},
+        return new Object[][]{
+                new Object[]{"осциллограф", "www.tehencom.com"},
         };
     }
 
-    @Test(dataProvider="keyWords")
+    //@Test(dataProvider = "keyWords")
     public void firstTest(String keyWord, String url) throws InterruptedException {
 
-        WebDriver driver  = new FirefoxDriver();
         driver.get("https://www.google.com.ua");
         driver.findElement(searchField).clear();
         driver.findElement(searchField).sendKeys(keyWord);
         driver.findElement(searchField).sendKeys(Keys.ENTER);
         Thread.sleep(3000);
 
-        for (int j=2;j<5;j++) {
-            String nextPage = ".//*[@id='nav']/tbody/tr/td[" + j + "]/a/span";
-            Thread.sleep(1000);
-            driver.findElement(By.xpath(nextPage)).click();
+        for (int i = 3; i <= 5; i++) {
+            Thread.sleep(2000);
+            List<WebElement> elementsList = driver.findElements(By.cssSelector("._Rm"));
 
-            for (int i = 1; i < 8; i++) {
-                //String findLink = ".//*[@id='rso']/div[3]/li[" + i + "]/div[@class=\"rc\"]/div[@class=\"s\"]/div/div[@class=\"f kv _SWb\"]/cite";
-                String findLink = ".//*[@id='rso']/div[3]/li[" + i + "]/div/div/div/div[1]/cite";
-                Thread.sleep(1000);
-                if (driver.findElement(By.xpath(findLink)).getText().contains(url)) {
-                    System.out.println("Site found");
+            for (WebElement option : elementsList) {
+                if (option.getText().contains(url)) {
+                    urlFound = true;
                     break;
                 }
             }
+            driver.findElement(By.xpath(".//*[@id='nav']/tbody/tr/td[" + i + "]/a/span")).click();
         }
+
+
+        Assert.assertTrue(urlFound);
+    }
+
+    @Test
+    public void findJob(){
+        driver.get("http://valvesoftware.com/jobs/job_postings.html");
+        WebElement dev = driver.findElement(By.xpath(".//div[contains(text(),'Software Engineer')]"));
+        WebElement psy = driver.findElement(By.cssSelector(".job_position_container[id*='psychologist']"));
+        Assert.assertTrue(dev.isDisplayed());
+        Assert.assertTrue(psy.isDisplayed());
+
+        }
+
+    @AfterTest
+    public void afterTest() {
+        driver.close();
         driver.quit();
     }
 }
