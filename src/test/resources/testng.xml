@@ -1,10 +1,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="firstTestSuite" verbose="1" parallel="tests" thread-count="1">
     <parameter name="expectedCount" value="2"/>
-    <test name="FirstTest">
+    <test name="basictasks.FirstTest">
         <classes>
-            <!--<class name="FirstTest"/>-->
-            <class name="FindJobTest"/>
+            <!--<class name="basictasks.FirstTest"/>-->
+            <class name="tests.functional.CreateSuiteTest"/>
         </classes>
     </test>
 </suite>

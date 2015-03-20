@@ -1,4 +1,4 @@
-/**
+package basictasks; /**
  * Created by Khrystyna.Shyian on 03.03.2015.
  */
 

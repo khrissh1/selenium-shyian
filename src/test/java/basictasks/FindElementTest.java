@@ -1,3 +1,5 @@
+package basictasks;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -20,6 +22,7 @@ public class FindElementTest extends TestBase {
         WebElement element = driver.findElement(By.cssSelector(".nav-input[class='nav']"));
         elementPresent = true;
         Assert.assertTrue(!elementPresent);
+
     }
 
 
