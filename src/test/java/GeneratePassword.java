@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Test {
+public class GeneratePassword {
 
     static Random rnd = new Random();
     static String sCurrentLine;
