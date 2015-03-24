@@ -30,7 +30,7 @@ public class TestStep {
 
     }
 
-    public void createTestSuite() throws InterruptedException {
+    public void createTestSuite(String testSuiteName) throws InterruptedException {
 
         HomePage homePage = new HomePage(driver);
         homePage.selectTestProject();
@@ -39,7 +39,7 @@ public class TestStep {
 
         TestSuite testSuite = new TestSuite(driver);
         switchToWorkFrame();
-        testSuite.createTestSuite();
+        testSuite.createTestSuite(testSuiteName);
 
     }
 
@@ -50,10 +50,10 @@ public class TestStep {
         testSuite.deleteTestSuite();
 
     }
-    public boolean verifyTestSuite() {
+    public boolean verifyTestSuite(String test) {
         TestSuite testSuite = new TestSuite(driver);
         switchToTreeFrame();
-        return testSuite.testSuiteIsCreated();
+        return testSuite.testSuiteIsCreated(test);
     }
 
 

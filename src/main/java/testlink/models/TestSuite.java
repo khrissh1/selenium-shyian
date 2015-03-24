@@ -1,5 +1,6 @@
 package testlink.models;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,30 +28,31 @@ public class TestSuite {
     }
 
 
-    public void createTestSuite() throws InterruptedException {
+    public void createTestSuite(String testSuiteName) throws InterruptedException {
         Thread.sleep(3000);
         driver.findElement(showTestSuiteOperations).click();
         driver.findElement(addNewSuite).click();
-        driver.findElement(suiteName).sendKeys("TestSuit_2");
+        driver.findElement(suiteName).sendKeys(testSuiteName);
         driver.findElement(saveSuiteButton).click();
     }
 
-    public boolean testSuiteIsCreated(){
+    public boolean testSuiteIsCreated(String testSuiteName){
 
         List <WebElement>  newTestSuite = driver.findElements(createdSuite);
         String bodyText = driver.findElement(By.tagName("body")).getText();
         boolean created = false;
         for(WebElement option : newTestSuite){
-            if (option.getText().equals("TestSuit_2")){
+            if (option.getText().equals(testSuiteName)){
                 created  = true;
             }
         }
 
-        return created & bodyText.contains("Test Suite created");
+        //return created & bodyText.contains("Test Suite created");
+        return bodyText.contains("Test Suite created");
     }
 
     public void deleteTestSuite() throws InterruptedException {
-        //Thread.sleep(3000);
+
         driver.findElement(showTestSuiteOperations).click();
         driver.findElement(deleteSuite).click();
         driver.findElement(reallyDeleteSuite).click();

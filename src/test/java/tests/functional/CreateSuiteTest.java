@@ -5,10 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import testlink.TestStep;
 
 import java.util.List;
@@ -19,7 +16,7 @@ import java.util.List;
 public class CreateSuiteTest extends TestStep {
 
 
-    @BeforeSuite
+    @BeforeTest
     public void initEnv() {
 
         driver = new FirefoxDriver();
@@ -29,27 +26,30 @@ public class CreateSuiteTest extends TestStep {
     public void createSuite() throws InterruptedException {
 
         Assert.assertTrue(login("admin", "admin"), "Login Failed");
-        createTestSuite();
-        Assert.assertTrue(verifyTestSuite(), "Test Suite Failed To Create");
+        createTestSuite("New Suite 1");
+        Assert.assertTrue(verifyTestSuite("New Suite 1"), "Test Suite Failed To Create");
 
 
 
 
     }
 
-    @AfterTest(alwaysRun=true)
+   // @AfterTest(alwaysRun=true)
     public void cleanData() throws InterruptedException {
         deleteTestSuite();
 
     }
 
-    @AfterSuite
-    public void shutdown() {
+    @AfterTest
+    public void shutdown() throws InterruptedException {
 
-        if (driver != null) {
+        //deleteTestSuite();
+
+       // if (driver != null) {
+            System.out.println("TEST");
             driver.close();
             driver.quit();
 
-        }
+        //}
     }
 }
