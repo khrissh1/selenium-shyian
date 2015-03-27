@@ -5,6 +5,8 @@
         <classes>
             <!--<class name="basictasks.FirstTest"/>-->
             <class name="tests.functional.CreateSuiteTest"/>
+            <class name="tests.functional.CreateCaseTest"/>
+            <class name="tests.functional.CreateStepsTest"/>
         </classes>
     </test>
 </suite>

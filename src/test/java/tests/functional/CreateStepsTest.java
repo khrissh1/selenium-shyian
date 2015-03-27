@@ -2,14 +2,15 @@ package tests.functional;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import testlink.TestSteps;
 
 /**
- * Created by Khrystyna.Shyian on 20.03.2015.
+ * Created by Khrystyna.Shyian on 25.03.2015.
  */
-public class CreateSuiteTest extends TestSteps {
-
+public class CreateStepsTest extends TestSteps {
 
     @BeforeTest
     public void initEnv() {
@@ -18,10 +19,10 @@ public class CreateSuiteTest extends TestSteps {
     }
 
     @Test
-    public void createSuite() throws InterruptedException {
+    public void createCase() throws InterruptedException {
 
         Assert.assertTrue(login("admin", "admin"), "Login Failed");
-        Assert.assertTrue(createTestSuite(), "Suite creation failed");
+        Assert.assertTrue(createTestStep(), "Test Step creation failed");
 
     }
 

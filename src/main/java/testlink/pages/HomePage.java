@@ -7,34 +7,27 @@ import org.openqa.selenium.support.ui.*;
 /**
  * Created by Khrystyna.Shyian on 20.03.2015.
  */
-public class HomePage {
-    protected WebDriver driver;
+public class HomePage extends AbstractPage {
+
     private final By version = By.xpath("//div[@class='menu_title']/span[contains(text(),'TestLink')]");
-    private final By testProject  = By.xpath("//div[@class='menu_bar']/div/form[@name='productForm']/select");
+    private final By testProject = By.xpath("//div[@class='menu_bar']/div/form[@name='productForm']/select");
 
     public HomePage(WebDriver driver) {
 
-        this.driver = driver;
+        super(driver);
     }
 
-    public boolean isOpen(){
+    public boolean isOpened() {
 
-    WebDriverWait  wait = new WebDriverWait(driver, 10);
-    wait.until(ExpectedConditions.presenceOfElementLocated(version));
-    return driver.findElements(version).size() > 0;
+        switchToHeaderFrame();
+        waitUntilElementIsPresent(version);
+        return driver.findElements(version).size() > 0;
     }
 
-    public void selectTestProject(){
+    public void selectTestProject() {
+
+        switchToHeaderFrame();
         Select select = new Select(driver.findElement(testProject));
         select.selectByVisibleText("#.:Test Project 1");
-        driver.switchTo().defaultContent();
     }
-
-    public void openTestSpecification() throws InterruptedException {
-
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector("#testspecification_topics>a[href='lib/general/frmWorkArea.php?feature=editTc']")).click();
-
-    }
-
 }

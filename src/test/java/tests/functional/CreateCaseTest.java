@@ -6,10 +6,9 @@ import org.testng.annotations.*;
 import testlink.TestSteps;
 
 /**
- * Created by Khrystyna.Shyian on 20.03.2015.
+ * Created by Khrystyna.Shyian on 25.03.2015.
  */
-public class CreateSuiteTest extends TestSteps {
-
+public class CreateCaseTest extends TestSteps {
 
     @BeforeTest
     public void initEnv() {
@@ -18,10 +17,10 @@ public class CreateSuiteTest extends TestSteps {
     }
 
     @Test
-    public void createSuite() throws InterruptedException {
+    public void createCase() throws InterruptedException {
 
         Assert.assertTrue(login("admin", "admin"), "Login Failed");
-        Assert.assertTrue(createTestSuite(), "Suite creation failed");
+        Assert.assertTrue(createTestCase(), "Test Case creation failed");
 
     }
 

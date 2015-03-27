@@ -1,11 +1,138 @@
 package testlink.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+import testlink.models.TestCase;
+import testlink.models.TestStep;
+import testlink.models.TestSuite;
+
+import java.util.List;
+
 /**
  * Created by Khrystyna.Shyian on 20.03.2015.
  */
-public class SpecificationPage {
+public class SpecificationPage extends AbstractPage {
 
-    public void login(String login, String password) {
+    private static final By specPage = By.cssSelector("#testspecification_topics>a[href='lib/general/frmWorkArea.php?feature=editTc']");
 
+    private static final By action = By.cssSelector(".clickable[title='Actions']");
+    private static final By addNewSuite = By.id("new_testsuite");
+    private static final By suiteName = By.id("name");
+    private static final By saveSuiteButton = By.cssSelector("input[name='add_testsuite_button']");
+    private static final By deleteSuite = By.cssSelector("#delete_testsuite");
+    private static final By reallyDeleteSuite = By.cssSelector(".workBack>form>input[type='submit']");
+    private static final By details = By.cssSelector("#cke_contents_details>iframe[title='Rich text editor, details']");
+    private static final By addNewCase = By.id("create_tc");
+    private static final By testCaseName = By.id("testcase_name");
+
+    private static final By testCaseDetails = By.cssSelector("#cke_contents_summary>iframe[title='Rich text editor, summary']");
+    private static final By testCasePreconditions = By.cssSelector("#cke_contents_preconditions>iframe[title='Rich text editor, preconditions']");
+    private static final By createNewCase = By.id("do_create_button_2");
+    private static final By createStep = By.xpath(".//*[@id='stepsControls']/div/input");
+
+    private static final By stepAction = By.xpath(".//*[@id='cke_contents_steps']/iframe[@title='Rich text editor, steps']");
+    private static final By expectedResults = By.xpath(".//*[@id='cke_contents_expected_results']/iframe[@title='Rich text editor, expected_results']");
+    private static final By executionSelector = By.name("exec_type");
+    private static final By savaAndExit = By.id("do_update_step_and_exit");
+    private static final By stepsTable = By.xpath( ".//*[@id='stepsControls']/table[@class='simple']");
+
+
+
+    public SpecificationPage(WebDriver driver) {
+        super(driver);
+    }
+
+    public void open() throws InterruptedException {
+
+        switchToMainFrame();
+        waitUntilElementIsPresent(specPage);
+        driver.findElement(specPage).click();
+
+    }
+
+    public void createTestSuite(TestSuite suite) throws InterruptedException {
+
+        switchToWorkFrame();
+        waitUntilElementIsPresent(action);
+        driver.findElement(action).click();
+        driver.findElement(addNewSuite).click();
+        driver.findElement(suiteName).sendKeys(suite.name);
+        driver.findElement(details).sendKeys(suite.details);
+        driver.findElement(saveSuiteButton).click();
+    }
+
+    public boolean testSuiteIsCreated(TestSuite suite) {
+
+        switchToWorkFrame();
+        String bodyText = driver.findElement(By.tagName("body")).getText();
+
+        return bodyText.contains("Test Suite created");
+    }
+
+    public void deleteTestSuite() throws InterruptedException {
+
+        driver.findElement(action).click();
+        driver.findElement(deleteSuite).click();
+        driver.findElement(reallyDeleteSuite).click();
+
+    }
+
+    public void selectTestSuite(TestSuite suite) throws InterruptedException {
+        switchToTreeFrame();
+
+        Actions action = new Actions(driver);
+        waitUntilElementIsPresent(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(@id,'extdd')]/span[contains(text(),'"+ suite.name + "')]"));
+        action.moveToElement(driver.findElement(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(@id,'extdd')]/span[contains(text(),'"+ suite.name + "')]"))).doubleClick().build().perform();
+    }
+
+    public void createTestCase(TestCase testcase) throws InterruptedException {
+
+        switchToWorkFrame();
+        driver.findElement(action).click();
+        driver.findElement(addNewCase).click();
+        driver.findElement(testCaseName).sendKeys(testcase.name);
+        driver.findElement(testCaseDetails).sendKeys(testcase.details);
+        driver.findElement(testCasePreconditions).sendKeys(testcase.preconditions);
+        driver.findElement(createNewCase).click();
+    }
+
+    public boolean testCaseIsCreated(TestCase testCase) {
+
+        switchToWorkFrame();
+        String bodyText = driver.findElement(By.tagName("body")).getText();
+
+        return bodyText.contains(testCase.name);
+    }
+
+    public void selectTestCase(TestCase testCase) throws InterruptedException {
+
+        switchToTreeFrame();
+        waitUntilElementIsPresent(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(text(),'" + testCase.name + "')]"));
+        driver.findElement(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(text(),'" + testCase.name + "')]")).click();
+    }
+
+    public void createTestStep(TestStep step) throws InterruptedException {
+
+        switchToWorkFrame();
+        waitUntilElementIsPresent(createStep);
+        driver.findElement(createStep).click();
+        waitUntilElementIsPresent(stepAction);
+        driver.findElement(stepAction).sendKeys(step.stepAction);
+        driver.findElement(expectedResults).sendKeys(step.executionResult);
+        Select select = new Select(driver.findElement(executionSelector));
+        select.selectByVisibleText(step.execution);
+        driver.findElement(savaAndExit).click();
+    }
+
+    public boolean testStepIsCreated(TestStep step) throws InterruptedException {
+
+        switchToWorkFrame();
+        waitUntilElementIsPresent(stepsTable);
+        String bodyText = driver.findElement(stepsTable).getText();
+
+        return bodyText.contains(step.stepAction);
     }
 }

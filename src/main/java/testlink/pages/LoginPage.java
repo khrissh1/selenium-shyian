@@ -6,9 +6,8 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by Khrystyna.Shyian on 20.03.2015.
  */
-public class LoginPage {
+public class LoginPage extends AbstractPage {
 
-    protected WebDriver driver;
     static private final String URL = "http://demo.testlink.org/latest/login.php";
     private final By loginFld = By.id("login");
     private final By passwordFld = By.name("tl_password");
@@ -16,7 +15,7 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver) {
 
-        this.driver = driver;
+        super(driver);
     }
 
     public void open() {
@@ -25,7 +24,7 @@ public class LoginPage {
 
     }
 
-    public HomePage login(String login, String password) {
+    public HomePage login(String login, String password) throws InterruptedException {
 
         driver.findElement(loginFld).sendKeys(login);
         driver.findElement(passwordFld).sendKeys(password);
