@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TestSuite {
 
-    public String name = "New test suite4";// + System.currentTimeMillis();
+    public String name = "New test suite5";// + System.currentTimeMillis();
     public String details = "Some details";
 }
 
