@@ -24,12 +24,12 @@ public class CreateSuiteTest extends TestSteps {
     public Object[][] suite() {
 
         TestSuite suite1 = new TestSuite();
-        suite1.setName("Suite1111");
-        suite1.setDetails("Details1111");
+        suite1.setName("Suite11111");
+        suite1.setDetails("Details11111");
 
         TestSuite suite2 = new TestSuite();
-        suite2.setName("Suite1121");
-        suite2.setDetails("Details1121");
+        suite2.setName("Suite11211");
+        suite2.setDetails("Details11211");
 
         return new Object[][]{
                 {suite1},
@@ -41,8 +41,8 @@ public class CreateSuiteTest extends TestSteps {
     public Object[][] testCase() {
 
         TestSuite suite1 = new TestSuite();
-        suite1.setName("Suite1111");
-        suite1.setDetails("Details1111");
+        suite1.setName("Suite11111");
+        suite1.setDetails("Details11111");
 
         TestCase testCase1  = new TestCase();
         testCase1.setName("Case111");
@@ -50,8 +50,8 @@ public class CreateSuiteTest extends TestSteps {
         testCase1.setPreconditions("Preconditions111");
 
         TestSuite suite2 = new TestSuite();
-        suite2.setName("Suite1121");
-        suite2.setDetails("Details1121");
+        suite2.setName("Suite11211");
+        suite2.setDetails("Details11211");
 
         TestCase testCase2  = new TestCase();
         testCase2.setName("Case112");
@@ -68,8 +68,8 @@ public class CreateSuiteTest extends TestSteps {
     public Object[][] steps() {
 
         TestSuite suite1 = new TestSuite();
-        suite1.setName("Suite1111");
-        suite1.setDetails("Details1111");
+        suite1.setName("Suite11111");
+        suite1.setDetails("Details11111");
 
         TestCase testCase1 = new TestCase();
         testCase1.setName("Case111");
@@ -82,8 +82,8 @@ public class CreateSuiteTest extends TestSteps {
         steps1.setExecution("Manual");
 
         TestSuite suite2 = new TestSuite();
-        suite2.setName("Suite1121");
-        suite2.setDetails("Details1121");
+        suite2.setName("Suite11211");
+        suite2.setDetails("Details11211");
 
         TestCase testCase2 = new TestCase();
         testCase2.setName("Case112");

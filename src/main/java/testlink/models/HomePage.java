@@ -5,5 +5,5 @@ package testlink.models;
  */
 public class HomePage {
 
-    public String projectName = "#.:Test Project 1";
+    public String projectName = "000:ABCDtest";
 }

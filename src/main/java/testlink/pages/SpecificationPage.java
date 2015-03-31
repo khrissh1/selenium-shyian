@@ -34,7 +34,7 @@ public class SpecificationPage extends AbstractPage {
     private static final By expectedResults = By.xpath(".//*[@id='cke_contents_expected_results']/iframe[@title='Rich text editor, expected_results']");
     private static final By executionSelector = By.name("exec_type");
     private static final By saveAndExit = By.id("do_update_step_and_exit");
-    private static final By stepsTable = By.xpath( ".//*[@id='stepsControls']/table[@class='simple']");
+    private static final By stepsTable = By.xpath(".//*[@id='stepsControls']/table[@class='simple']");
     private static final By body = By.tagName("body");
 
 
@@ -57,6 +57,7 @@ public class SpecificationPage extends AbstractPage {
         waitUntilElementIsPresent(action);
         driver.findElement(action).click();
         driver.findElement(addNewSuite).click();
+        waitUntilElementIsPresent(suiteName);
         driver.findElement(suiteName).sendKeys(suite.getName());
         driver.findElement(details).sendKeys(suite.getDetails());
         driver.findElement(saveSuiteButton).click();
