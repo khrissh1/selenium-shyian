@@ -1,9 +1,7 @@
 package tests.functional;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import testlink.TestSteps;
 import testlink.models.TestCase;
 import testlink.models.TestStep;
 import testlink.models.TestSuite;
@@ -11,14 +9,7 @@ import testlink.models.TestSuite;
 /**
  * Created by Khrystyna.Shyian on 20.03.2015.
  */
-public class CreateSuiteTest extends TestSteps {
-
-    @BeforeMethod
-    public void initEnv() {
-
-        driver = new FirefoxDriver();
-
-    }
+public class CreateSuiteTest extends AbstractTest {
 
     @DataProvider
     public Object[][] suite() {
@@ -65,7 +56,7 @@ public class CreateSuiteTest extends TestSteps {
     }
 
     @DataProvider
-    public Object[][] steps() {
+    public Object[][] step() {
 
         TestSuite suite1 = new TestSuite();
         suite1.setName("Suite11111");
@@ -104,31 +95,21 @@ public class CreateSuiteTest extends TestSteps {
     @Test(dataProvider = "suite")
     public void createSuite(TestSuite suite) throws InterruptedException {
 
-        Assert.assertTrue(login("admin", "admin"), "Login Failed");
-        Assert.assertTrue(createTestSuite(suite), "Suite creation failed");
+        Assert.assertTrue(testSteps.login("admin", "admin"), "Login Failed");
+        Assert.assertTrue(testSteps.createTestSuite(suite), "Suite creation failed");
     }
 
     @Test(dataProvider = "testCase", dependsOnMethods = {"createSuite"})
     public void createCase(TestSuite suite, TestCase testCase) throws InterruptedException {
 
-        Assert.assertTrue(login("admin", "admin"), "Login Failed");
-        Assert.assertTrue(createTestCase(suite, testCase), "Test Case creation failed");
+        Assert.assertTrue(testSteps.login("admin", "admin"), "Login Failed");
+        Assert.assertTrue(testSteps.createTestCase(suite, testCase), "Test Case creation failed");
     }
 
-    @Test(dataProvider = "steps", dependsOnMethods = {"createCase"})
+    @Test(dataProvider = "step", dependsOnMethods = {"createCase"})
     public void createSteps(TestSuite suite, TestCase testCase, TestStep steps) throws InterruptedException {
 
-        Assert.assertTrue(login("admin", "admin"), "Login Failed");
-        Assert.assertTrue(createTestStep(suite, testCase, steps), "Test Step creation failed");
-    }
-
-    @AfterMethod
-    public void shutdown() {
-
-        if (driver != null) {
-            driver.close();
-            driver.quit();
-
-        }
+        Assert.assertTrue(testSteps.login("admin", "admin"), "Login Failed");
+        Assert.assertTrue(testSteps.createTestStep(suite, testCase, steps), "Test Step creation failed");
     }
 }

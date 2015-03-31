@@ -16,13 +16,16 @@ public class TestSteps {
 
     protected WebDriver driver;
 
+    public TestSteps(WebDriver driver) {
+        this.driver = driver;
+    }
 
     public boolean login(String login, String password) throws InterruptedException {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
 
-        return loginPage.login(login,password).isOpened();
+        return loginPage.login(login, password).isOpened();
 
     }
 
