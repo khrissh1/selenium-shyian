@@ -5,6 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import selenium.DriverFactory;
+import selenium.DriverWrapper;
 import testlink.TestSteps;
 import util.PropertyLoader;
 
@@ -13,7 +14,7 @@ import util.PropertyLoader;
  */
 public class AbstractTest {
 
-    protected WebDriver driver;
+    protected DriverWrapper driver;
     TestSteps testSteps;
 
     @BeforeMethod

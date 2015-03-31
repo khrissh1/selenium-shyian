@@ -11,7 +11,7 @@ public class DriverFactory {
     private static final String FIREFOX = "firefox";
     private static final String CHROME = "chrome";
 
-    public static WebDriver makeDriver(String driverName) throws Exception {
+    public static DriverWrapper makeDriver(String driverName) throws Exception {
         WebDriver driver = null;
         if (driverName.equals(FIREFOX)) {
             driver = new FirefoxDriver();
@@ -20,7 +20,7 @@ public class DriverFactory {
         } else {
             throw new Exception();
         }
-        return driver;
+        return new DriverWrapper(driver) ;
     }
 
 

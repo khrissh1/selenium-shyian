@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+import selenium.DriverWrapper;
 import testlink.models.TestCase;
 import testlink.models.TestStep;
 import testlink.models.TestSuite;
@@ -39,7 +40,7 @@ public class SpecificationPage extends AbstractPage {
 
 
 
-    public SpecificationPage(WebDriver driver) {
+    public SpecificationPage(DriverWrapper driver) {
         super(driver);
     }
 

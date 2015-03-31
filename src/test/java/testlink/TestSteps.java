@@ -2,6 +2,7 @@ package testlink;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import selenium.DriverWrapper;
 import testlink.models.TestCase;
 import testlink.models.TestStep;
 import testlink.models.TestSuite;
@@ -14,9 +15,9 @@ import testlink.pages.SpecificationPage;
  */
 public class TestSteps {
 
-    protected WebDriver driver;
+    protected DriverWrapper driver;
 
-    public TestSteps(WebDriver driver) {
+    public TestSteps(DriverWrapper driver) {
         this.driver = driver;
     }
 
