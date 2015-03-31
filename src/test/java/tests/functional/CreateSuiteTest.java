@@ -99,14 +99,14 @@ public class CreateSuiteTest extends AbstractTest {
         Assert.assertTrue(testSteps.createTestSuite(suite), "Suite creation failed");
     }
 
-    @Test(dataProvider = "testCase", dependsOnMethods = {"createSuite"})
+    @Test(dataProvider = "testCase")
     public void createCase(TestSuite suite, TestCase testCase) throws InterruptedException {
 
         Assert.assertTrue(testSteps.login("admin", "admin"), "Login Failed");
         Assert.assertTrue(testSteps.createTestCase(suite, testCase), "Test Case creation failed");
     }
 
-    @Test(dataProvider = "step", dependsOnMethods = {"createCase"})
+    @Test(dataProvider = "step")
     public void createSteps(TestSuite suite, TestCase testCase, TestStep steps) throws InterruptedException {
 
         Assert.assertTrue(testSteps.login("admin", "admin"), "Login Failed");
