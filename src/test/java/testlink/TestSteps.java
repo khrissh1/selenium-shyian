@@ -26,14 +26,14 @@ public class TestSteps {
 
     }
 
-    public boolean createTestSuite() throws InterruptedException {
+    public boolean createTestSuite(TestSuite suite) throws InterruptedException {
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectTestProject();
+        homePage.selectTestProject(new testlink.models.HomePage());
         SpecificationPage specificationPage = new SpecificationPage(driver);
         specificationPage.open();
-        specificationPage.createTestSuite(new TestSuite());
-        return specificationPage.testSuiteIsCreated(new TestSuite());
+        specificationPage.createTestSuite(suite);
+        return specificationPage.testSuiteIsCreated(suite);
 
     }
 
@@ -45,27 +45,27 @@ public class TestSteps {
 
     }
 
-    public boolean createTestCase() throws InterruptedException {
+    public boolean createTestCase(TestSuite suite, TestCase testCase) throws InterruptedException {
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectTestProject();
+        homePage.selectTestProject(new testlink.models.HomePage());
         SpecificationPage specificationPage = new SpecificationPage(driver);
         specificationPage.open();
-        specificationPage.selectTestSuite(new TestSuite());
-        specificationPage.createTestCase(new TestCase());
-        return specificationPage.testCaseIsCreated(new TestCase());
+        specificationPage.selectTestSuite(suite);
+        specificationPage.createTestCase(testCase);
+        return specificationPage.testCaseIsCreated(testCase);
     }
 
-    public boolean createTestStep() throws InterruptedException {
+    public boolean createTestStep(TestSuite suite, TestCase testCase, TestStep steps) throws InterruptedException {
 
         HomePage homePage = new HomePage(driver);
-        homePage.selectTestProject();
+        homePage.selectTestProject(new testlink.models.HomePage());
         SpecificationPage specificationPage = new SpecificationPage(driver);
         specificationPage.open();
-        specificationPage.selectTestSuite(new TestSuite());
-        specificationPage.selectTestCase(new TestCase());
-        specificationPage.createTestStep(new TestStep());
-        return specificationPage.testStepIsCreated(new TestStep());
+        specificationPage.selectTestSuite(suite);
+        specificationPage.selectTestCase(testCase);
+        specificationPage.createTestStep(steps);
+        return specificationPage.testStepIsCreated(steps);
 
     }
 

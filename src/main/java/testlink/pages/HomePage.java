@@ -17,17 +17,18 @@ public class HomePage extends AbstractPage {
         super(driver);
     }
 
-    public boolean isOpened() {
+    public boolean isOpened() throws InterruptedException {
 
+        Thread.sleep(5000);
         switchToHeaderFrame();
         waitUntilElementIsPresent(version);
         return driver.findElements(version).size() > 0;
     }
 
-    public void selectTestProject() {
+    public void selectTestProject(testlink.models.HomePage homePage) {
 
         switchToHeaderFrame();
         Select select = new Select(driver.findElement(testProject));
-        select.selectByVisibleText("#.:Test Project 1");
+        select.selectByVisibleText(homePage.projectName);
     }
 }

@@ -2,14 +2,11 @@ package testlink.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import testlink.models.TestCase;
 import testlink.models.TestStep;
 import testlink.models.TestSuite;
-
-import java.util.List;
 
 /**
  * Created by Khrystyna.Shyian on 20.03.2015.
@@ -36,8 +33,9 @@ public class SpecificationPage extends AbstractPage {
     private static final By stepAction = By.xpath(".//*[@id='cke_contents_steps']/iframe[@title='Rich text editor, steps']");
     private static final By expectedResults = By.xpath(".//*[@id='cke_contents_expected_results']/iframe[@title='Rich text editor, expected_results']");
     private static final By executionSelector = By.name("exec_type");
-    private static final By savaAndExit = By.id("do_update_step_and_exit");
+    private static final By saveAndExit = By.id("do_update_step_and_exit");
     private static final By stepsTable = By.xpath( ".//*[@id='stepsControls']/table[@class='simple']");
+    private static final By body = By.tagName("body");
 
 
 
@@ -59,17 +57,17 @@ public class SpecificationPage extends AbstractPage {
         waitUntilElementIsPresent(action);
         driver.findElement(action).click();
         driver.findElement(addNewSuite).click();
-        driver.findElement(suiteName).sendKeys(suite.name);
-        driver.findElement(details).sendKeys(suite.details);
+        driver.findElement(suiteName).sendKeys(suite.getName());
+        driver.findElement(details).sendKeys(suite.getDetails());
         driver.findElement(saveSuiteButton).click();
     }
 
     public boolean testSuiteIsCreated(TestSuite suite) {
 
         switchToWorkFrame();
-        String bodyText = driver.findElement(By.tagName("body")).getText();
+        String bodyText = driver.findElement(body).getText();
 
-        return bodyText.contains("Test Suite created");
+        return bodyText.contains(suite.textAfterCreation);
     }
 
     public void deleteTestSuite() throws InterruptedException {
@@ -84,8 +82,8 @@ public class SpecificationPage extends AbstractPage {
         switchToTreeFrame();
 
         Actions action = new Actions(driver);
-        waitUntilElementIsPresent(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(@id,'extdd')]/span[contains(text(),'"+ suite.name + "')]"));
-        action.moveToElement(driver.findElement(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(@id,'extdd')]/span[contains(text(),'"+ suite.name + "')]"))).doubleClick().build().perform();
+        waitUntilElementIsPresent(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(@id,'extdd')]/span[contains(text(),'"+ suite.getName() + "')]"));
+        action.moveToElement(driver.findElement(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(@id,'extdd')]/span[contains(text(),'"+ suite.getName() + "')]"))).doubleClick().build().perform();
     }
 
     public void createTestCase(TestCase testcase) throws InterruptedException {
@@ -93,25 +91,25 @@ public class SpecificationPage extends AbstractPage {
         switchToWorkFrame();
         driver.findElement(action).click();
         driver.findElement(addNewCase).click();
-        driver.findElement(testCaseName).sendKeys(testcase.name);
-        driver.findElement(testCaseDetails).sendKeys(testcase.details);
-        driver.findElement(testCasePreconditions).sendKeys(testcase.preconditions);
+        driver.findElement(testCaseName).sendKeys(testcase.getName());
+        driver.findElement(testCaseDetails).sendKeys(testcase.getDetails());
+        driver.findElement(testCasePreconditions).sendKeys(testcase.getPreconditions());
         driver.findElement(createNewCase).click();
     }
 
     public boolean testCaseIsCreated(TestCase testCase) {
 
         switchToWorkFrame();
-        String bodyText = driver.findElement(By.tagName("body")).getText();
+        String bodyText = driver.findElement(body).getText();
 
-        return bodyText.contains(testCase.name);
+        return bodyText.contains(testCase.getName());
     }
 
     public void selectTestCase(TestCase testCase) throws InterruptedException {
 
         switchToTreeFrame();
-        waitUntilElementIsPresent(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(text(),'" + testCase.name + "')]"));
-        driver.findElement(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(text(),'" + testCase.name + "')]")).click();
+        waitUntilElementIsPresent(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(text(),'" + testCase.getName() + "')]"));
+        driver.findElement(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(text(),'" + testCase.getName() + "')]")).click();
     }
 
     public void createTestStep(TestStep step) throws InterruptedException {
@@ -120,11 +118,11 @@ public class SpecificationPage extends AbstractPage {
         waitUntilElementIsPresent(createStep);
         driver.findElement(createStep).click();
         waitUntilElementIsPresent(stepAction);
-        driver.findElement(stepAction).sendKeys(step.stepAction);
-        driver.findElement(expectedResults).sendKeys(step.executionResult);
+        driver.findElement(stepAction).sendKeys(step.getStepAction());
+        driver.findElement(expectedResults).sendKeys(step.getExecutionResult());
         Select select = new Select(driver.findElement(executionSelector));
-        select.selectByVisibleText(step.execution);
-        driver.findElement(savaAndExit).click();
+        select.selectByVisibleText(step.getExecution());
+        driver.findElement(saveAndExit).click();
     }
 
     public boolean testStepIsCreated(TestStep step) throws InterruptedException {
@@ -133,6 +131,6 @@ public class SpecificationPage extends AbstractPage {
         waitUntilElementIsPresent(stepsTable);
         String bodyText = driver.findElement(stepsTable).getText();
 
-        return bodyText.contains(step.stepAction);
+        return bodyText.contains(step.getStepAction());
     }
 }

@@ -1,18 +1,32 @@
 package testlink.models;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-
 /**
  * Created by Khrystyna.Shyian on 20.03.2015.
  */
 public class TestSuite {
 
-    public String name = "New test suite5";// + System.currentTimeMillis();
-    public String details = "Some details";
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+
+
+    public String name;// = "New test suite5";// + System.currentTimeMillis();
+    public String details;// = "Some details";
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public String textAfterCreation = "Test Suite created";
 }
 
 
