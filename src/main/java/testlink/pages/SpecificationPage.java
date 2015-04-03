@@ -38,6 +38,9 @@ public class SpecificationPage extends AbstractPage {
     private static final By stepsTable = By.xpath(".//*[@id='stepsControls']/table[@class='simple']");
     private static final By body = By.tagName("body");
 
+    private static final By uploadFile = By.id("uploadedFile");
+    private static final By fileTitle = By.id("fileTitle");
+    private static final By uploadButton = By.xpath(".//*[@id='aForm']/input[@value='Upload file']");
 
 
     public SpecificationPage(DriverWrapper driver) {
@@ -134,5 +137,20 @@ public class SpecificationPage extends AbstractPage {
         String bodyText = driver.findElement(stepsTable).getText();
 
         return bodyText.contains(step.getStepAction());
+    }
+
+    public void uploadFileToTestSuite(TestSuite suite){
+        switchToWorkFrame();
+        driver.findElement(uploadFile).sendKeys(suite.getFilePath());
+        driver.findElement(fileTitle).sendKeys(suite.getFileName());
+        driver.findElement(uploadButton).click();
+    }
+
+    public boolean fileIsUploaded(TestSuite suite) throws InterruptedException {
+
+        switchToWorkFrame();
+        String bodyText = driver.findElement(body).getText();
+
+        return bodyText.contains(suite.getFileName());
     }
 }

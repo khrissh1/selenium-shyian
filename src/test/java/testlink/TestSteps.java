@@ -73,4 +73,16 @@ public class TestSteps {
 
     }
 
+    public boolean uploadFileToTestSuite(TestSuite suite) throws InterruptedException {
+
+        HomePage homePage = new HomePage(driver);
+        homePage.selectTestProject(new testlink.models.HomePage());
+        SpecificationPage specificationPage = new SpecificationPage(driver);
+        specificationPage.open();
+        specificationPage.selectTestSuite(suite);
+        specificationPage.uploadFileToTestSuite(suite);
+
+        return specificationPage.fileIsUploaded(suite);
+    }
+
 }

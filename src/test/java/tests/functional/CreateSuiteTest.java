@@ -92,7 +92,21 @@ public class CreateSuiteTest extends AbstractTest {
         };
     }
 
-    @Test(dataProvider = "suite")
+    @DataProvider
+    public Object[][] fileUpload() {
+
+        TestSuite suite = new TestSuite();
+        suite.setName("Suite1111");
+        suite.setDetails("Details1111");
+        suite.setFileName("test");
+        suite.setFilePath("D:\\simphonic_autotests\\selenium-shyian-master\\test.txt");
+
+        return new Object[][]{
+                {suite}
+        };
+    }
+
+    //@Test(dataProvider = "suite")
     public void createSuite(TestSuite suite) throws InterruptedException {
 
         Assert.assertTrue(testSteps.login("admin", "admin"), "Login Failed");
@@ -111,5 +125,12 @@ public class CreateSuiteTest extends AbstractTest {
 
         Assert.assertTrue(testSteps.login("admin", "admin"), "Login Failed");
         Assert.assertTrue(testSteps.createTestStep(suite, testCase, steps), "Test Step creation failed");
+    }
+
+    @Test(dataProvider = "fileUpload")
+    public void uploadFileToSuite(TestSuite suite) throws InterruptedException {
+
+        Assert.assertTrue(testSteps.login("admin", "admin"), "Login Failed");
+        Assert.assertTrue(testSteps.uploadFileToTestSuite(suite), "File upload failed");
     }
 }

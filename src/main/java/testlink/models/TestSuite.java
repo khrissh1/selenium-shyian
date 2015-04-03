@@ -17,6 +17,24 @@ public class TestSuite {
 
     public String name;// = "New test suite5";// + System.currentTimeMillis();
     public String details;// = "Some details";
+    public String fileName;
+    public String filePath;
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
     public String getName() {
         return name;
