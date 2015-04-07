@@ -1,5 +1,7 @@
 package testlink.models;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 /**
  * Created by Khrystyna.Shyian on 20.03.2015.
  */
@@ -30,5 +32,12 @@ public class TestCase {
 
     public void setPreconditions(String preconditions) {
         this.preconditions = preconditions;
+    }
+
+
+    //public String name = getCorrectName();
+    public String getCorrectName(){
+        name= RandomStringUtils.randomAlphabetic((10));
+        return name;
     }
 }

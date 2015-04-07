@@ -6,11 +6,16 @@ import testlink.models.TestCase;
 import testlink.models.TestStep;
 import testlink.models.TestSuite;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Khrystyna.Shyian on 20.03.2015.
  */
 public class CreateSuiteTest extends AbstractTest {
 
+    List<TestCase> testData = Arrays.asList(new TestCase());
     @DataProvider
     public Object[][] suite() {
 
