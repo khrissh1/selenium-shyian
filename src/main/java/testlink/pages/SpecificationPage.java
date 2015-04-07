@@ -52,6 +52,7 @@ public class SpecificationPage extends AbstractPage {
         switchToMainFrame();
         waitUntilElementIsPresent(specPage);
         driver.findElement(specPage).click();
+        LOG.info("Specification page is opening");
 
     }
 
@@ -65,6 +66,8 @@ public class SpecificationPage extends AbstractPage {
         driver.findElement(suiteName).sendKeys(suite.getName());
         driver.findElement(details).sendKeys(suite.getDetails());
         driver.findElement(saveSuiteButton).click();
+        LOG.info("Test suite  " + suite.getName() + " is creating");
+
     }
 
     public boolean testSuiteIsCreated(TestSuite suite) {
@@ -86,9 +89,10 @@ public class SpecificationPage extends AbstractPage {
     public void selectTestSuite(TestSuite suite) throws InterruptedException {
         switchToTreeFrame();
 
-        Actions action = new Actions(driver);
+        Actions action = new Actions(driver.driver);
         waitUntilElementIsPresent(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(@id,'extdd')]/span[contains(text(),'"+ suite.getName() + "')]"));
         action.moveToElement(driver.findElement(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(@id,'extdd')]/span[contains(text(),'"+ suite.getName() + "')]"))).doubleClick().build().perform();
+        LOG.info("Test suite  " + suite.getName() + " is selecting");
     }
 
     public void createTestCase(TestCase testcase) throws InterruptedException {
@@ -100,6 +104,7 @@ public class SpecificationPage extends AbstractPage {
         driver.findElement(testCaseDetails).sendKeys(testcase.getDetails());
         driver.findElement(testCasePreconditions).sendKeys(testcase.getPreconditions());
         driver.findElement(createNewCase).click();
+        LOG.info("Test case  " + testcase.getName() + " is creating");
     }
 
     public boolean testCaseIsCreated(TestCase testCase) {
@@ -115,6 +120,7 @@ public class SpecificationPage extends AbstractPage {
         switchToTreeFrame();
         waitUntilElementIsPresent(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(text(),'" + testCase.getName() + "')]"));
         driver.findElement(By.xpath("//li[@class='x-tree-node']/div[contains(@id,'extdd')]/a[@class='x-tree-node-anchor']/span[contains(text(),'" + testCase.getName() + "')]")).click();
+        LOG.info("Test case  " + testCase.getName() + " is selecting");
     }
 
     public void createTestStep(TestStep step) throws InterruptedException {
@@ -128,6 +134,7 @@ public class SpecificationPage extends AbstractPage {
         Select select = new Select(driver.findElement(executionSelector));
         select.selectByVisibleText(step.getExecution());
         driver.findElement(saveAndExit).click();
+        LOG.info("Test step is creating");
     }
 
     public boolean testStepIsCreated(TestStep step) throws InterruptedException {
@@ -144,6 +151,7 @@ public class SpecificationPage extends AbstractPage {
         driver.findElement(uploadFile).sendKeys(suite.getFilePath());
         driver.findElement(fileTitle).sendKeys(suite.getFileName());
         driver.findElement(uploadButton).click();
+        LOG.info("File  " + suite.getFileName() + " is uploading");
     }
 
     public boolean fileIsUploaded(TestSuite suite) throws InterruptedException {

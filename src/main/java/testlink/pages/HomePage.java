@@ -31,5 +31,6 @@ public class HomePage extends AbstractPage {
         switchToHeaderFrame();
         Select select = new Select(driver.findElement(testProject));
         select.selectByVisibleText(homePage.projectName);
+        LOG.info("Test project " + homePage.projectName + " is selecting");
     }
 }

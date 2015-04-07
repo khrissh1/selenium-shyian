@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class DriverWrapper implements WebDriver {
 
-    protected WebDriver driver;
+    public WebDriver driver;
 
     public DriverWrapper(WebDriver driver) {
         this.driver = driver;

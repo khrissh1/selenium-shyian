@@ -30,6 +30,7 @@ public class LoginPage extends AbstractPage {
         driver.findElement(loginFld).sendKeys(login);
         driver.findElement(passwordFld).sendKeys(password);
         driver.findElement(loginButton).click();
+        LOG.info("User " + login + " is logining");
         return new HomePage(driver);
 
     }

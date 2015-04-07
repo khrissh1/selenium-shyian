@@ -26,6 +26,7 @@ public class TestSteps {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
 
+
         return loginPage.login(login, password).isOpened();
 
     }
